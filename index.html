@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="description" content="WELCOME TO NOVA — a science-fiction story about humanity, Mars, and the mysterious artificial world of NOVA. Read Chapter I online.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="WELCOME TO NOVA | MARTIAN LOVE">
+  <meta property="og:description" content="A cinematic science-fiction story about humanity, Mars, and the mysterious world of NOVA.">
+  <meta property="og:type" content="website">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WELCOME TO NOVA</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+:root{
+  --bg:#020307;
+  --white:#f3f1ec;
+  --muted:#aaa9ad;
+  --gold:#d8b48a;
+  --line:rgba(216,180,138,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:Inter,Arial,sans-serif;overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:-4}
+.space-glow{
+  position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 15%,rgba(75,55,125,.13),transparent 32%),
+    radial-gradient(circle at 85% 70%,rgba(100,45,25,.08),transparent 28%),
+    #020307;
+}
+.vignette{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.64) 100%)}
+
+/* INTRO */
+#intro{
+  position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+  background:#020307;transition:opacity 1.2s ease,visibility 1.2s ease;
+}
+#intro.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.intro-inner{text-align:center;padding:25px}
+.nova-logo{
+  font-family:Cinzel,serif;font-size:clamp(4rem,12vw,9rem);
+  font-weight:400;letter-spacing:.25em;margin-left:.25em;
+  background:linear-gradient(#fff,#d8dce8 55%,#8992a7);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 35px rgba(180,195,230,.2);
+  animation:breathe 4s ease-in-out infinite;
+}
+.tagline{
+  margin-top:20px;color:#aeb2bd;font-size:clamp(.66rem,1.4vw,.94rem);
+  letter-spacing:.16em;font-weight:300;
+}
+.enter{
+  margin-top:42px;min-width:195px;height:60px;border:1px solid rgba(180,195,225,.5);
+  border-radius:999px;color:#fff;background:rgba(255,255,255,.045);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  letter-spacing:.35em;padding-left:.35em;cursor:pointer;position:relative;overflow:hidden;
+  box-shadow:inset 0 1px rgba(255,255,255,.15),0 0 35px rgba(100,120,180,.12);
+  transition:.45s;
+}
+.enter:before{
+  content:"";position:absolute;top:0;bottom:0;width:45%;left:-65%;
+  transform:skewX(-22deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  animation:sweep 3.5s infinite;
+}
+.enter:hover{
+  transform:translateY(-3px);border-color:#e2e7f3;
+  box-shadow:inset 0 1px rgba(255,255,255,.2),0 0 45px rgba(120,140,200,.28);
+}
+
+/* STORY INTRO */
+#story-intro{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 6vw;
+}
+.story-grid{
+  width:min(1180px,100%);display:grid;
+  grid-template-columns:minmax(280px,440px) 1fr;
+  gap:clamp(45px,8vw,110px);align-items:center;
+}
+.cover-wrap{width:min(100%,430px);margin:auto}
+.cover{
+  width:100%;display:block;
+  border-radius:3px;
+  box-shadow:0 30px 100px rgba(0,0,0,.65),0 0 70px rgba(160,70,30,.08);
+}
+.intro-copy{max-width:690px}
+.eyebrow{
+  color:#a79a8c;font-size:.67rem;letter-spacing:.34em;
+  text-transform:uppercase;
+}
+.book-title{
+  font-family:Cinzel,serif;font-weight:400;
+  font-size:clamp(2.5rem,6vw,5.5rem);
+  letter-spacing:.08em;line-height:1.08;
+  margin:16px 0 28px;
+}
+.book-title span{display:block;font-size:.42em;letter-spacing:.28em;color:#b7b1aa;margin-top:13px}
+.synopsis{
+  color:#c1c0c2;font-size:1rem;line-height:2;
+  font-weight:300;
+}
+.synopsis p{margin-bottom:23px}
+.nova-mark{
+  color:#d7b487;letter-spacing:.2em;font-family:Cinzel,serif;
+  text-align:center;margin:26px 0;font-size:1.15rem;
+}
+.question{
+  font-family:Cinzel,serif;color:#eee8e0;
+  font-size:clamp(1.05rem,2vw,1.45rem);
+  line-height:1.7;margin:28px 0;
+}
+.question em{font-style:italic;color:#d6b68f}
+.read{
+  display:inline-flex;margin-top:15px;padding:15px 27px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(255,255,255,.035);
+  color:#eee;text-decoration:none;font-size:.7rem;letter-spacing:.23em;
+  transition:.35s;
+}
+.read:hover{border-color:#e2c29b;background:rgba(180,120,65,.08);box-shadow:0 0 35px rgba(180,100,45,.1)}
+
+/* READER */
+#reader{padding:130px 7vw 160px;min-height:100vh}
+.reader-wrap{width:min(800px,100%);margin:auto}
+.chapter{text-align:center;margin-bottom:80px}
+.chapter span{color:#a79a8c;font-size:.63rem;letter-spacing:.35em}
+.chapter h2{
+  font-family:Cinzel,serif;font-weight:400;
+  font-size:clamp(2rem,5vw,3.6rem);margin-top:17px;
+}
+.story-text{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:1.12rem;line-height:2.05;color:#d9d8d7;
+}
+.story-text p{margin-bottom:28px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:80px 0}
+.back{display:block;text-align:center;color:#96949a;text-decoration:none;font-size:.65rem;letter-spacing:.25em}
+
+@keyframes breathe{50%{filter:brightness(1.12)}}
+@keyframes sweep{0%,55%{left:-65%}100%{left:125%}}
+@media(max-width:780px){
+  .story-grid{grid-template-columns:1fr}
+  .cover-wrap{width:min(78vw,370px)}
+  .intro-copy{text-align:center}
+  .synopsis{text-align:left}
+  #story-intro{padding-top:80px}
+}
+
+.story-text .quote{color:#e7e2da;font-style:italic;margin-top:34px}
+.story-text .emphasis{font-family:Cinzel,serif;letter-spacing:.2em;text-align:center;color:#e1c39e;font-size:1.35rem}
+.story-text .year{font-family:Cinzel,serif;text-align:center;font-size:2.4rem;letter-spacing:.25em;color:#d7b487;margin:45px 0}
+.project-nova{
+  width:min(430px,100%);margin:42px auto;padding:25px 18px;
+  text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.project-nova strong{display:block;font-family:Cinzel,serif;letter-spacing:.22em;font-size:1rem}
+.project-nova span{display:block;margin-top:10px;font-size:.58rem;letter-spacing:.22em;color:#9d9aa0}
+.final-line{
+  text-align:center;font-family:Cinzel,serif;letter-spacing:.16em;
+  color:#e0c09a;font-size:clamp(.8rem,2vw,1.1rem);line-height:1.8;
+  margin:55px 0 45px;
+}
+.story-text .ending{font-size:1.25rem;margin-top:45px;color:#f0ede8}
+.next{color:#9e8e7d;text-align:center;font-size:.65rem;letter-spacing:.28em;margin-bottom:28px}
+.back{display:block;text-align:center;color:#96949a;text-decoration:none;font-size:.65rem;letter-spacing:.25em}
+
+</style>
+</head>
+<body class="locked">
+
+<canvas id="stars"></canvas>
+<div class="space-glow"></div>
+<div class="vignette"></div>
+
+<!-- CINEMATIC ENTRY -->
+<div id="intro">
+  <div class="intro-inner">
+    <div class="nova-logo">NOVA</div>
+    <div class="tagline">The future belongs to those who builds it</div>
+    <button class="enter" id="enter">ENTER</button>
+  </div>
+</div>
+
+<!-- BOOK INTRODUCTION -->
+<section id="story-intro">
+  <div class="story-grid">
+
+    <div class="cover-wrap">
+      <img class="cover" src="martian-love-cover.png" alt="MARTIAN LOVE book cover">
+    </div>
+
+    <div class="intro-copy">
+      <div class="eyebrow">A NOVA ORIGINAL STORY</div>
+
+      <h1 class="book-title">
+        WELCOME TO NOVA
+        <span>MARTIAN LOVE</span>
+      </h1>
+
+      <div class="synopsis">
+        <p>
+          When life on Mars was slowly becoming impossible, humanity took another step toward survival.
+        </p>
+
+        <p>
+          They built an artificial planet designed to become a new home for humanity.
+        </p>
+
+        <div class="nova-mark">⟦ NOVA ⟧</div>
+
+        <p>
+          At first glance, it seemed like the perfect solution. A vast, advanced world built to preserve
+          human life and give humanity a future.
+        </p>
+
+        <p>
+          But there was one question no one seemed to <strong>ask</strong>:
+        </p>
+
+        <div class="question">
+          Was there really a place in Nova for everyone?
+          <br>
+          <em>And if there wasn't...</em>
+          <br>
+          <em>Could this truly be called a fair solution?</em>
+        </div>
+
+        <p>
+          <strong>Junior</strong> was born on Nova.
+        </p>
+
+        <p>
+          From the very beginning, his goal was simple:
+          to contribute to Nova and help build a better future for the people who lived there.
+        </p>
+
+        <p>
+          But when someone unexpected enters his life, everything begins to change.
+        </p>
+
+        <p>
+          What starts as a simple encounter slowly pulls Junior into questions he was never supposed to ask.
+        </p>
+
+        <p>
+          The more he learns about Nova, the more he realizes that the world he grew up believing in is built on something much darker.
+        </p>
+
+        <p>
+          Its history has been altered.
+        </p>
+
+        <p>
+          And the truth about Nova's past...
+          <br>
+          <em>may be the one thing humanity was never meant to remember.</em>
+        </p>
+      </div>
+
+      <a class="read" href="#reader">READ THE STORY&nbsp; →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- STORY READER -->
+<section id="reader">
+  <div class="reader-wrap">
+
+    <div class="chapter">
+      <span>CHAPTER I</span>
+      <h2>NOVA</h2>
+    </div>
+
+    <article class="story-text">
+      <p>The auditorium was already full.</p>
+
+      <p>Hundreds of young people filled the rows of seats, their voices blending into a constant murmur beneath the high ceiling. Some were talking excitedly with their friends, while others looked around the room, trying to recognize familiar faces. A few were still checking their phones as they waited for the ceremony to begin.</p>
+
+      <p>It was loud enough that no single conversation could be heard clearly.</p>
+
+      <p>Then the lights went out.</p>
+
+      <p>Almost immediately, the voices faded. One by one, the conversations stopped until the entire auditorium fell completely silent.</p>
+
+      <p>At the front of the room, a projector flickered to life.</p>
+
+      <p>A familiar red planet appeared on the enormous screen.</p>
+
+      <p class="emphasis">Mars.</p>
+
+      <p>Then, a voice began to speak.</p>
+
+      <p class="quote">"For thousands of years, Mars has been home to humanity."</p>
+
+      <p>Images of ancient cities, forests, oceans, and settlements spread across the screen as a calm voice continued.</p>
+
+      <p class="quote">"Not only to humans, but to countless other species that found shelter upon its surface."</p>
+
+      <p>The images slowly changed.</p>
+
+      <p>The forests became smaller. The oceans began to disappear, and cities grew darker beneath an increasingly polluted sky.</p>
+
+      <p class="quote">"But every home has its limits."</p>
+
+      <p class="quote">"Mars was no longer the world it had once been."</p>
+
+      <p>The screen faded to black.</p>
+
+      <p>For a moment, there was nothing but darkness.</p>
+
+      <p>Then a single number appeared.</p>
+
+      <p class="year">2178</p>
+
+      <p class="quote">"That year marked the beginning of one of the greatest disasters in human history."</p>
+
+      <p>A massive earthquake struck without warning, destroying a region that stretched for thousands of kilometers. Buildings collapsed, roads split apart, and entire communities disappeared beneath the ruins.</p>
+
+      <p class="quote">"Thousands died."</p>
+
+      <p class="quote">"But the earthquake was only the beginning."</p>
+
+      <p>Volcanic eruptions followed, filling the atmosphere with ash and poisonous gases. Air pollution spread across the planet, making even the simplest act of breathing dangerous in some regions.</p>
+
+      <p class="quote">"Then came the drought."</p>
+
+      <p>Rivers dried up, fields cracked beneath the heat, and water became more valuable than ever. Millions were forced to leave their homes in search of somewhere they could survive.</p>
+
+      <p class="quote">"And after the drought came the storms."</p>
+
+      <p>Enormous clouds formed over the planet, carrying toxic particles and violent winds that swept through cities and destroyed everything in their path.</p>
+
+      <p class="quote">"Disease soon followed."</p>
+
+      <p>Hospitals filled with people suffering from respiratory illnesses and infections that had once been under control. Adults and children alike became victims, and thousands more lost their lives.</p>
+
+      <p>The images gradually faded.</p>
+
+      <p class="quote">"Of course, none of this was new to humanity."</p>
+
+      <p class="quote">"We had survived disasters before."</p>
+
+      <p class="quote">"We had always called them fate."</p>
+
+      <p>There was a brief pause.</p>
+
+      <p class="quote">"And, as always... fate came."</p>
+
+      <p>The screen changed.</p>
+
+      <p>A new planet appeared above Mars.</p>
+
+      <p>It was called NOVA.</p>
+
+      <p>Unlike the barren surface of Mars, the artificial planet was covered with vast green regions. Forests stretched across its surface, rivers flowed between its cities, and agricultural fields provided food for its growing population.</p>
+
+      <p>NOVA was the result of decades of research and engineering. Scientists had succeeded in creating controlled environments where plants could grow naturally, eventually allowing entire forests and agricultural ecosystems to develop across the artificial planet. What had once seemed impossible had become one of humanity's greatest scientific achievements.</p>
+
+      <p class="quote">"For decades, humanity had been preparing for this possibility."</p>
+
+      <p class="quote">"Project NOVA."</p>
+
+      <div class="project-nova">
+        <strong>PROJECT NOVA</strong>
+        <span>NEW ORBITAL VIABLE ARCHITECTURE</span>
+      </div>
+
+      <p class="quote">"NOVA was created to become humanity's new home, an artificial planet capable of supporting human life on an unprecedented scale."</p>
+
+      <p>The images showed its cities, forests, research facilities, and vast agricultural regions as the voice continued.</p>
+
+      <p class="quote">"Through years of scientific research, humanity learned how to recreate stable environments where life could thrive, allowing plants to grow, forests to spread, and food to be cultivated on a scale never before possible."</p>
+
+      <p class="quote">"And for the first time in human history, an artificial stellar-energy system became the primary source of NOVA's power."</p>
+
+      <p>The images continued to show NOVA's cities, forests, agricultural regions, and research facilities, while the energy system itself remained unseen.</p>
+
+      <p class="quote">"By simulating the energy produced by a star, NOVA could provide a stable and nearly limitless source of power, allowing an entire artificial planet to sustain human life without the limitations that once threatened humanity on Mars."</p>
+
+      <p>The images changed once more, showing scientists working in laboratories, engineers designing enormous machines, researchers studying plants and artificial ecosystems, and doctors treating patients.</p>
+
+      <p>Young students appeared next, studying in classrooms and working alongside experienced scientists.</p>
+
+      <p class="quote">"But a world like this requires more than machines. It requires people capable of building its future, protecting it, and carrying it forward."</p>
+
+      <p class="quote">"And now, you are those people."</p>
+
+      <p class="quote">"You are the young minds who will shape what comes next, the engineers, scientists, researchers, doctors, and creators who will help build the future of humanity."</p>
+
+      <p class="quote">"Your talent brought you here, and your hard work brought you here. From this moment forward, your knowledge, your dedication, and your choices will help determine what comes next."</p>
+
+      <p>The final image appeared.</p>
+
+      <p>The NOVA symbol stood against a bright background, followed by a single sentence:</p>
+
+      <div class="final-line">THE FUTURE BELONGS TO THOSE WHO BUILD IT.</div>
+
+      <p>For a moment, the auditorium remained completely silent before applause suddenly filled the room. Hundreds of students began clapping, some smiling and others exchanging excited looks as the sound grew louder and the lights slowly came back on.</p>
+
+      <p>Almost everyone was applauding...</p>
+
+      <p>Among the crowd sat a young man who hadn't moved, his eyes still fixed on the blank screen.</p>
+
+      <p class="ending">His name was <strong>Jun.</strong></p>
+    </article>
+
+    <div class="divider"></div>
+    <div class="next">END OF CHAPTER I</div>
+    <a class="back" href="#story-intro">↑ BACK TO WELCOME TO NOVA</a>
+
+  </div>
+</section>
+
+<script>
+const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');
+let w,h,dpr,stars=[];
+const COUNT=680;
+
+function resize(){
+  dpr=Math.min(devicePixelRatio||1,2);
+  w=innerWidth;h=innerHeight;
+  canvas.width=w*dpr;canvas.height=h*dpr;
+  canvas.style.width=w+'px';canvas.style.height=h+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+function makeStar(){
+  return {x:(Math.random()*2-1)*w,y:(Math.random()*2-1)*h,z:Math.random()*w+1,p:0};
+}
+function reset(s){
+  s.x=(Math.random()*2-1)*w;s.y=(Math.random()*2-1)*h;s.z=w;s.p=s.z;
+}
+function init(){
+  stars=Array.from({length:COUNT},makeStar);
+  stars.forEach(s=>{s.z=Math.random()*w;s.p=s.z});
+}
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  for(const s of stars){
+    s.p=s.z;s.z-=1.45;
+    if(s.z<1){reset(s);continue}
+    const x=cx+(s.x/s.z)*w*.72;
+    const y=cy+(s.y/s.z)*h*.72;
+    const px=cx+(s.x/s.p)*w*.72;
+    const py=cy+(s.y/s.p)*h*.72;
+    if(x<0||x>w||y<0||y>h){reset(s);continue}
+    const depth=1-s.z/w,r=Math.max(.4,depth*2.1),a=.15+depth*.8;
+    ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(x,y);
+    ctx.strokeStyle=`rgba(220,228,245,${a*.34})`;ctx.lineWidth=.7;ctx.stroke();
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(235,238,245,${a})`;ctx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+resize();init();draw();
+addEventListener('resize',()=>{resize();init()});
+
+document.getElementById('enter').onclick=()=>{
+  document.getElementById('intro').classList.add('hidden');
+  document.body.classList.remove('locked');
+  setTimeout(()=>document.getElementById('story-intro').scrollIntoView({behavior:'smooth'}),650);
+};
+</script>
+</body>
+</html>
